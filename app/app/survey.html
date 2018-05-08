@@ -4,14 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>FriendFinder</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-        crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.js" integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -126,8 +122,7 @@
             </div>
             <br />
             <div class="form-group">
-                <label for="q9" class="lead">You think that everyone’s views should be respected regardless of whether they are supported by facts or
-                    not.</label>
+                <label for="q9" class="lead">You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</label>
                 <select id="q9" class="form-control" required>
                     <option value="" selected disabled>Please select</option>
                     <option value="1">1 (Strongly Disagree)</option>
@@ -150,16 +145,12 @@
                 </select>
             </div>
             <br />
-            <button type="button" id="submit" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#modal">
-                <i class="fa fa-check-square" aria-hidden="true"></i> Submit</button>
+            <button type="button" id="submit" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#modal"><i class="fa fa-check-square" aria-hidden="true"></i> Submit</button>
         </form>
         <br />
         <footer class="footer">
             <div class="container">
-                <p>
-                    <a href="/api/friends" target='_blank'>API Friends List</a> |
-                    <a href="https://github.com/dansasaki12/friendfinder" target='_blank'>GitHub</a>
-                </p>
+                <p><a href="/api/friends" target='_blank'>API Friends List</a> | <a href="https://github.com/dansasaki12/friendfinder" target='_blank'>GitHub</a></p>
             </div>
         </footer>
     </div>
@@ -178,76 +169,76 @@
         </div>
     </div>
     <script type="text/javascript">
-        // declare global variables
-        var nameVal, imageVal, q1Val, q2Val, q3Val, q4Val, q5Val, q6Val, q7Val, q8Val, q9Val, q10Val, newPerson;
-        $('#submit').on('click', function (event) {
-            event.preventDefault();
-            // set global variable values for multiple uses in this and other functions
-            nameVal = $('#name').val();
-            imageVal = $('#image').val();
-            q1Val = parseInt($('#q1').val());
-            q2Val = parseInt($('#q2').val());
-            q3Val = parseInt($('#q3').val());
-            q4Val = parseInt($('#q4').val());
-            q5Val = parseInt($('#q5').val());
-            q6Val = parseInt($('#q6').val());
-            q7Val = parseInt($('#q7').val());
-            q8Val = parseInt($('#q8').val());
-            q9Val = parseInt($('#q9').val());
-            q10Val = parseInt($('#q10').val());
-            newPerson = {
-                name: nameVal,
-                image: imageVal,
-                responses: [q1Val, q2Val, q3Val, q4Val, q5Val, q6Val, q7Val, q8Val, q9Val, q10Val],
-                total: q1Val + q2Val + q3Val + q4Val + q5Val + q6Val + q7Val + q8Val + q9Val + q10Val
-            };
-            // declare and set local variables
-            var modalTitle = $('.modal-title');
-            var modalBody = $('.modal-body');
-            var modal = $('#modal');
-            var apiFriendsRoute = '/api/friends';
-            if (formIsValid()) {
-                $.get(apiFriendsRoute, function (data) {
-                    var match = makeMatch(data);
-                    if (match.name !== undefined) {
-                        modalTitle.text('You have a match!');
-                        modalBody.html('<p class="strong">You\'re most compatible with:</p><p>' + match.name + '</p><img src="' + match.image + '" height="45">');
-                    } else {
-                        modalTitle.text('Too few friends');
-                        modalBody.text('Sorry, there are too few friends to match you with.');
-                    }
-                }).then(function () {
-                    modal.show();
-                    $('.form')[0].reset();
-                    $.post(apiFriendsRoute, newPerson);
-                });
-            } else {
-                modalTitle.text('Error');
-                modalBody.text('Please make sure all questions have been filled in.');
+    // declare global variables
+    var nameVal, imageVal, q1Val, q2Val, q3Val, q4Val, q5Val, q6Val, q7Val, q8Val, q9Val, q10Val, newPerson;
+    $('#submit').on('click', function(event) {
+        event.preventDefault();
+        // set global variable values for multiple uses in this and other functions
+        nameVal = $('#name').val();
+        imageVal = $('#image').val();
+        q1Val = parseInt($('#q1').val());
+        q2Val = parseInt($('#q2').val());
+        q3Val = parseInt($('#q3').val());
+        q4Val = parseInt($('#q4').val());
+        q5Val = parseInt($('#q5').val());
+        q6Val = parseInt($('#q6').val());
+        q7Val = parseInt($('#q7').val());
+        q8Val = parseInt($('#q8').val());
+        q9Val = parseInt($('#q9').val());
+        q10Val = parseInt($('#q10').val());
+        newPerson = {
+            name: nameVal,
+            image: imageVal,
+            responses: [q1Val, q2Val, q3Val, q4Val, q5Val, q6Val, q7Val, q8Val, q9Val, q10Val],
+            total: q1Val + q2Val + q3Val + q4Val + q5Val + q6Val + q7Val + q8Val + q9Val + q10Val
+        };
+        // declare and set local variables
+        var modalTitle = $('.modal-title');
+        var modalBody = $('.modal-body');
+        var modal = $('#modal');
+        var apiFriendsRoute = '/api/friends';
+        if (formIsValid()) {
+            $.get(apiFriendsRoute, function(data) {
+                var match = makeMatch(data);
+                if (match.name !== undefined) {
+                    modalTitle.text('You have a match!');
+                    modalBody.html('<p class="strong">You\'re most compatible with:</p><p>' + match.name + '</p><img src="' + match.image + '" height="45">');
+                } else {
+                    modalTitle.text('Too few friends');
+                    modalBody.text('Sorry, there are too few friends to match you with.');
+                }
+            }).then(function() {
                 modal.show();
+                $('.form')[0].reset();
+                $.post(apiFriendsRoute, newPerson);
+            });
+        } else {
+            modalTitle.text('Error');
+            modalBody.text('Please make sure all questions have been filled in.');
+            modal.show();
+        }
+    });
+    function formIsValid() {
+        return (nameVal !== '' && imageVal !== '' && !isNaN(q1Val) && !isNaN(q2Val) && !isNaN(q3Val) && !isNaN(q4Val) &&
+            !isNaN(q5Val) && !isNaN(q6Val) && !isNaN(q7Val) && !isNaN(q8Val) && !isNaN(q9Val) && !isNaN(q10Val));
+    }
+    function makeMatch(data) {
+        var difference = 50;
+        var minName;
+        var minImage;
+        data.forEach(function(person) {
+            var localDiff = Math.abs(newPerson.total - person.total);
+            if (localDiff < difference) {
+                difference = localDiff;
+                minName = person.name;
+                minImage = person.image;
             }
         });
-        function formIsValid() {
-            return (nameVal !== '' && imageVal !== '' && !isNaN(q1Val) && !isNaN(q2Val) && !isNaN(q3Val) && !isNaN(q4Val) &&
-                !isNaN(q5Val) && !isNaN(q6Val) && !isNaN(q7Val) && !isNaN(q8Val) && !isNaN(q9Val) && !isNaN(q10Val));
-        }
-        function makeMatch(data) {
-            var difference = 50;
-            var minName;
-            var minImage;
-            data.forEach(function (person) {
-                var localDiff = Math.abs(newPerson.total - person.total);
-                if (localDiff < difference) {
-                    difference = localDiff;
-                    minName = person.name;
-                    minImage = person.image;
-                }
-            });
-            return {
-                name: minName,
-                image: minImage
-            };
-        }
+        return {
+            name: minName,
+            image: minImage
+        };
+    }
     </script>
 </body>
 
